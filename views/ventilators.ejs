@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hospital Inventory</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <div class = "container">
+        <div>
+            <h1>Ventilators</h1>
+            <span style="float: right;">
+                <form action = "/searchV" method="GET">
+                    <input type = "text" placeholder="Search" name = "name">
+                    <button type="submit" class="btn btn-secondary btn-sm">Search</button>
+                </form>
+            </span>
+        </div>
+        
+        
+        <a class="btn btn-primary" href="/hospitals" role="button">Hospitals</a>
+        <a class="btn btn-primary" href="/ventilators" role="button">Ventilators</a>
+        <hr>
+
+        <% if (ventilators.length > 0) { %>
+            <ul>
+                <!-- Loop through ventilators -->
+                <% for(var i = 0; i < ventilators.length; i++) {%>
+                    <h3><%= ventilators[i].name %>    <a href = "/updatePage/<%=ventilators[i].ventilatorId %>" class = "btn btn-primary btn-sm">Update</a>  <a href = "/delete/<%=ventilators[i].ventilatorId %>" class = "btn btn-danger btn-sm">Delete</a></h3>
+                    <li><b>Ventilator ID:</b> <%= ventilators[i].ventilatorId%></li>
+                    <li><b>Status:</b> <%= ventilators[i].status %></li>
+                    <br>
+                    <hr>
+                <% } %>
+            </ul>
+        <%} else { %>
+        <p> No match found. </p>
+        <% } %>
+        
+        <h3>Add ventilator details</h3>
+        <form action="/vent" method = "POST">
+            <div class="form-group">
+              <label for="hid">HId:</label>
+              <input type="text" class="form-control" placeholder="Enter  hId" name="hid" required>
+              <label for="ventilatorId">VentilatorId:</label>
+              <input type="text" class="form-control" placeholder="Ventilator Id" name="ventilatorId" required>
+              <label for="status">Status:</label>
+              <input type="text" class="form-control" placeholder="Status" name="status" required>
+              <label for="name">Name:</label>
+              <input type="text" class="form-control" placeholder="Name of the Hospital" name="name" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+  </body>
+</html>

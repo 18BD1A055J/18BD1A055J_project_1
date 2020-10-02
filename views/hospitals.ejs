@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hospital Inventory</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <div class = "container">
+        <div>
+            <h1>Hospitals</h1>
+            <span style="float: right;">
+                <form action = "/searchH" method="GET">
+                    <input type = "text" placeholder="Search" name = "name">
+                    <button type="submit" class="btn btn-secondary btn-sm">Search</button>
+                </form>
+            </span>
+        </div>
+        <a class="btn btn-primary" href="/hospitals" role="button">Hospitals</a>
+        <a class="btn btn-primary" href="/ventilators" role="button">Ventilators</a>
+        <hr>
+
+        <% if (hospitals.length > 0) { %>
+          <ul>
+            <!-- Loop through hospitals -->
+            <% for(var i = 0; i < hospitals.length; i++) {%>
+              <h3><%= hospitals[i].name %></h3>
+              <li><b>Address:</b> <%= hospitals[i].address %></li>
+              <li><b>Contact no.:</b> <%= hospitals[i].contact %></li>
+              <br>
+              <hr>
+            <% } %>
+          </ul>
+        <%} else { %>
+        <p> No Hospitals found. </p>
+        <% } %>
+
+        <h3>Add a hospital</h3>
+        <form action="/hosp" method = "POST">
+            <div class="form-group">
+              <label for="hid">HId:</label>
+              <input type="text" class="form-control" placeholder="Enter hosptial id" name="hid" required>
+              <label for="name">Name:</label>
+              <input type="text" class="form-control" placeholder="Name" name="name" required>
+              <label for="address">Address:</label>
+              <input type="text" class="form-control" placeholder="Address" name="address" required>
+              <label for="contact">Contact No.:</label>
+              <input type="text" class="form-control" placeholder="Contact Number" name="contact" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+  </body>
+</html>
